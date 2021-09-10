@@ -1,9 +1,13 @@
 $dir = "D:/Code/Test"
 
-$fileCheck = Test-Path -Path $dir | where {([datetime]::now.Date -eq $_.lastwritetime.Date)};
+$fileCheck = Get-ChildItem -Path $dir -Recurse | where {([datetime]::now.Date -eq $_.lastwritetime.Date)};
 
-if($fileCheck -eq $true) {
-    $fileName = Get-ChildItem -Path $dir | where {([datetime]::now.Date -eq $_.lastwritetime.Date)};
+$fileTest = Test-Path $fileCheck.FullName
 
-    Write-Host $fileName
+if ($fileTest -eq $true ) {
+
+Write-Host "Backup Successful. $fileCheck is todays backup."
+        }
+else {
+    Write-Host "FAILURE! No Backup File available from today."
 }
