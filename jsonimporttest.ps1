@@ -21,7 +21,7 @@ $ids = $results.id
 #Set total for sum
 $discardTotal = 0
 #Sum of each field from previous entry
-$ids | ForEach {$discardTotal += $_}
+$ids | ForEach-Object {$discardTotal += $_}
 # Print result
 if($discardTotal -eq 55)
             {
